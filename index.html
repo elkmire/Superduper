@@ -9,17 +9,18 @@
     </script>
     <style>
         :root {
-            --bg: #121212;
-            --surface: #1e1e1e;
-            --surface-alt: #252525;
+            --bg: #0a0a0a;
+            --surface: #171717;
+            --surface-alt: #202020;
             --text: #ffffff;
-            --text-secondary: #a0a0a0;
-            --primary: #0099ff;
-            --success: #00cc66;
-            --error: #ff4444;
-            --border: #333333;
-            --surface-hover: #2a2a2a;
-            --input-focus: rgba(0, 153, 255, 0.1);
+            --text-secondary: #b0b0b0;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --success: #22c55e;
+            --error: #ef4444;
+            --border: #404040;
+            --surface-hover: #323232;
+            --input-focus: rgba(59, 130, 246, 0.15);
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,7 +30,7 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            padding: 20px;
+            padding: 16px;
             min-height: 100vh;
         }
 
@@ -39,96 +40,98 @@
         }
 
         h1 {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 24px;
-            color: var(--text);
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 32px;
+            background: var(--surface);
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .dynamic-text {
+            animation: colorChange 4s infinite;
+        }
+
+        .dynamic-text-alt {
+            animation: colorChangeAlt 4s infinite;
+        }
+
+        @keyframes colorChange {
+            0% { color: var(--primary); }
+            50% { color: #8b5cf6; }
+            100% { color: var(--primary); }
+        }
+
+        @keyframes colorChangeAlt {
+            0% { color: #8b5cf6; }
+            50% { color: var(--primary); }
+            100% { color: #8b5cf6; }
         }
 
         .controls {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) auto;
+            gap: 12px;
             margin-bottom: 24px;
             padding: 16px;
             background: var(--surface);
             border-radius: 8px;
-        }
-
-        .seed-row {
-            display: flex;
-            gap: 16px;
-        }
-
-        .seed-input {
-            flex: 1;
-        }
-
-        .key-row {
-            width: 100%;
-        }
-
-        .button-row {
-            display: flex;
-            justify-content: flex-end;
+            align-items: end;
         }
 
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .text-block {
             position: relative;
             margin-bottom: 24px;
+            background: var(--surface);
+            padding: 16px;
+            border-radius: 8px;
         }
 
         .text-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         label {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.875rem;
+            font-weight: 500;
         }
 
         input {
-            padding: 8px;
+            padding: 8px 12px;
             border: 1px solid var(--border);
             background: var(--bg);
             color: var(--text);
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
-
-        input[type="number"] {
+            border-radius: 6px;
+            font-size: 0.925rem;
             width: 100%;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            font-family: monospace;
         }
 
         button {
-            background: var(--surface);
-            color: var(--primary);
-            border: 1px solid var(--primary);
+            background: var(--primary);
+            color: white;
+            border: none;
             padding: 8px 16px;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.925rem;
+            font-weight: 500;
             transition: all 0.2s ease;
-            user-select: none;
-            -webkit-user-select: none;
+            height: 37px;
         }
 
         button:hover {
-            background: var(--surface-hover);
+            background: var(--primary-hover);
         }
 
         .copy-btn {
@@ -137,7 +140,7 @@
             gap: 6px;
             background: var(--surface-alt);
             padding: 6px 12px;
-            font-size: 0.85rem;
+            font-size: 0.875rem;
         }
 
         .copy-btn::before {
@@ -147,30 +150,24 @@
 
         .copy-btn.success {
             background: var(--success);
-            border-color: var(--success);
-            color: var(--bg);
-        }
-
-        .copy-btn.success::before {
-            content: '✓';
+            color: white;
         }
 
         .copy-btn.error {
             background: var(--error);
-            border-color: var(--error);
-            color: var(--bg);
+            color: white;
         }
 
         textarea {
             width: 100%;
             height: 120px;
             padding: 12px;
-            background: var(--surface);
+            background: var(--bg);
             border: 1px solid var(--border);
             color: var(--text);
-            border-radius: 8px;
+            border-radius: 6px;
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.925rem;
             resize: vertical;
             line-height: 1.5;
         }
@@ -182,7 +179,7 @@
         }
 
         .status {
-            font-size: 0.85rem;
+            font-size: 0.875rem;
             color: var(--text-secondary);
             display: flex;
             justify-content: space-between;
@@ -193,12 +190,12 @@
             color: var(--error);
         }
 
-        @media (max-width: 600px) {
-            .seed-row {
-                flex-direction: column;
+        @media (max-width: 640px) {
+            .controls {
+                grid-template-columns: 1fr;
             }
             
-            .seed-input {
+            button {
                 width: 100%;
             }
         }
@@ -206,28 +203,22 @@
 </head>
 <body>
     <div class="container">
-        <h1>Superduper</h1>
+        <h1><span class="dynamic-text">Super</span><span class="dynamic-text-alt">duper</span></h1>
         
         <div class="controls">
-            <div class="seed-row">
-                <div class="input-group seed-input">
-                    <label for="seed1">Primary Seed (1-1000)</label>
-                    <input type="number" id="seed1" value="42" min="1" max="1000" oninput="process()">
-                </div>
-                <div class="input-group seed-input">
-                    <label for="seed2">Secondary Seed (1-1000)</label>
-                    <input type="number" id="seed2" value="137" min="1" max="1000" oninput="process()">
-                </div>
+            <div class="input-group">
+                <label for="seed1">Primary Seed (1-1000)</label>
+                <input type="number" id="seed1" value="42" min="1" max="1000" oninput="process()">
             </div>
-            <div class="key-row">
-                <div class="input-group">
-                    <label for="key">Alphanumeric Key</label>
-                    <input type="text" id="key" placeholder="Enter key" value="default" oninput="process()">
-                </div>
+            <div class="input-group">
+                <label for="seed2">Secondary Seed (1-1000)</label>
+                <input type="number" id="seed2" value="137" min="1" max="1000" oninput="process()">
             </div>
-            <div class="button-row">
-                <button onclick="toggleMode()" id="modeBtn">ENCODE</button>
+            <div class="input-group">
+                <label for="key">Key</label>
+                <input type="text" id="key" placeholder="Enter key" value="default" oninput="process()">
             </div>
+            <button onclick="toggleMode()" id="modeBtn">ENCODE</button>
         </div>
 
         <div class="text-block">
