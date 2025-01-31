@@ -1,6 +1,5 @@
-# [Superduper]([https://elkmire.github.io/Crystal/](https://elkmire.github.io/Superduper/))
+# [Superduper](https://elkmire.github.io/Crystal/](https://elkmire.github.io/Superduper/)
 click here^
-
 
 ## System Overview
 Superduper is a browser-based cryptographic system that combines multiple security inputs (two numeric seeds and an alphanumeric key) with AES encryption for secure text transformation. The system provides deterministic encryption with enhanced security and memory optimization.
