@@ -245,7 +245,6 @@ function generateRandomKey(length = 16) {
         .map(x => chars[x % chars.length])
         .join('');
 }
-
         function hammingEncode(str) {
             const bytes = new TextEncoder().encode(str);
             const encoded = new Uint8Array(bytes.length * 2);
@@ -414,19 +413,14 @@ function generateRandomKey(length = 16) {
         }
 
         let timeout;
+
 function process() {
     clearTimeout(timeout);
     timeout = setTimeout(() => {
         const text = document.getElementById('input').value;
-        // Generate new random values for each processing
-        const s1 = generateRandomSeed();
-        const s2 = generateRandomSeed();
-        const alphaKey = generateRandomKey();
-        
-        // Update the UI with new values
-        document.getElementById('seed1').value = s1;
-        document.getElementById('seed2').value = s2;
-        document.getElementById('key').value = alphaKey;
+        const s1 = parseInt(document.getElementById('seed1').value) || 1;
+        const s2 = parseInt(document.getElementById('seed2').value) || 1;
+        const alphaKey = document.getElementById('key').value || 'default';
 
         try {
             const result = mode === 'encode' 
@@ -453,7 +447,6 @@ function process() {
 }
 
  document.addEventListener('DOMContentLoaded', () => {
-    // Set random initial values
     document.getElementById('seed1').value = generateRandomSeed();
     document.getElementById('seed2').value = generateRandomSeed();
     document.getElementById('key').value = generateRandomKey();
