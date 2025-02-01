@@ -163,6 +163,27 @@
             line-height: 1.5;
         }
 
+.export-section {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.export-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.925rem;
+    transition: all 0.2s ease;
+}
+
+.export-btn:hover {
+    background: var(--surface-hover);
+    border-color: var(--primary);
+}
+
         textarea:focus, input:focus {
             outline: none;
             border-color: var(--primary);
@@ -195,6 +216,12 @@
 <body>
     <div class="container">
         <h1><span class="dynamic-text">Super</span><span class="dynamic-text-alt">duper</span></h1>
+
+<div class="export-section">
+    <button onclick="exportToFile()" class="export-btn">Export Seeds & Key</button>
+</div>
+
+<div class="controls">
         
         <div class="controls">
             <div class="input-group">
@@ -444,6 +471,27 @@ function process() {
             document.getElementById('stats').textContent = '';
         }
     }, 300);
+}
+
+function exportToFile() {
+    const seed1 = document.getElementById('seed1').value;
+    const seed2 = document.getElementById('seed2').value;
+    const key = document.getElementById('key').value;
+    
+    const content = `Superduper Configuration\n-------------------\nPrimary Seed: ${seed1}\nSecondary Seed: ${seed2}\nKey: ${key}`;
+    
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'duper.txt';
+    
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    URL.revokeObjectURL(url);
 }
 
  document.addEventListener('DOMContentLoaded', () => {
